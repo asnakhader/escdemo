@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
-import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class TextExtractionController {
 
 		try {
 			// Decode base64 image
-			byte[] imageBytes = DatatypeConverter.parseBase64Binary(request.getBase64VisaImage());
+			byte[] imageBytes = Base64.getDecoder().decode(request.getBase64VisaImage());
 			System.out.println("Decoded base64 preview: " + Arrays.toString(Arrays.copyOf(imageBytes, 10)));
 
 			// Convert bytes to BufferedImage
